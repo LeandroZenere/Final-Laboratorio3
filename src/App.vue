@@ -7,6 +7,7 @@
           <router-link class= "encabezado" to="/historialdemovimientos">Historial de Movimientos</router-link>
           <router-link class= "encabezado" to="/estadoactual">Estado Actual</router-link> 
           <router-link class= "encabezado" to="/usuarios">Usuarios Registrados</router-link>
+          <router-link class= "encabezado" to="/compranueva">Test</router-link>
         </nav>
 </div>
   <router-view />
@@ -55,7 +56,6 @@ align-items: center;
   margin-left: 4%;
 }
 
-/* .encabezado:active, */
 .encabezado:hover {
   transform: scale(1.03);
 }

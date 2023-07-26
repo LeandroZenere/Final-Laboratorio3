@@ -75,11 +75,11 @@ export default {
 
     obtenerEstadoActual() {
       const idDeUsuario = localStorage.getItem('idDeUsuario');
-      const url = `https://laboratorio3-5fc7.restdb.io/rest/transactions?q={"user_id":"${idDeUsuario}"}`;
+      const url = `https://laboratorio3-f36a.restdb.io/rest/transactions?q={"user_id":"${idDeUsuario}"}`;
   
       axios.get(url, {
         headers: {
-          'x-apikey': '64bdbc3386d8c5613ded91e7',
+          'x-apikey': '60eb09146661365596af552f',
         },
       }).then((response) => {
         const transacciones = response.data;

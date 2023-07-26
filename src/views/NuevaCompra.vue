@@ -103,11 +103,11 @@
     }
   },
 
-      ApiClient() {
+  ApiClient() {
         return axios.create({
-          baseURL: 'https://laboratorio3-5fc7.restdb.io/rest/',
+          baseURL: 'https://laboratorio3-f36a.restdb.io/rest/',
           headers: {
-            'x-apikey': '64bdbc3386d8c5613ded91e7',
+            'x-apikey': '60eb09146661365596af552f',
           },
         });
       },
@@ -156,9 +156,9 @@
         };
   
         axios
-          .post('https://laboratorio3-5fc7.restdb.io/rest/transactions', nuevaTransaccion, {
+          .post('https://laboratorio3-f36a.restdb.io/rest/transactions', nuevaTransaccion, {
             headers: {
-              'x-apikey': '64bdbc3386d8c5613ded91e7',
+              'x-apikey': '60eb09146661365596af552f',
             },
           })
           .then((response) => {
@@ -222,7 +222,7 @@
     const idDeUsuario = this.idDeUsuario;
     const codigoCriptomoneda = this.criptomonedaSeleccionada;
 
-    const url = `https://laboratorio3-5fc7.restdb.io/rest/transactions?q={"user_id":"${idDeUsuario}","crypto_code":"${codigoCriptomoneda}"}`;
+    const url = `https://laboratorio3-f36a.restdb.io/rest/transactions?q={"user_id":"${idDeUsuario}","crypto_code":"${codigoCriptomoneda}"}`;
     const apiClient = this.ApiClient();
   
     apiClient
@@ -466,4 +466,3 @@
     margin-top: 50px;
   }
   </style>
-  

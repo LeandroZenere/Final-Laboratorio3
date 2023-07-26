@@ -33,8 +33,8 @@
         </table>
       </div>
     </div>
-  <div>
-    <input v-model="nuevaId" type="text" placeholder="Ingrese su ID de Usuario de 10 dígitos" @input="verificarId">
+  <div class="otrousuario">
+    <input v-model="nuevaId" type="text" placeholder="Ingrese ID de usuario" @input="verificarId">
     <p v-if="debeMostrarError" class="alerta">ID inválido o sin registros por mostrar.</p>
     <button @click="verificarMovimientosRegistrados">Buscar</button>
   </div>
@@ -94,16 +94,16 @@ export default {
     
     ApiClient() {
         return axios.create({
-          baseURL: 'https://laboratorio3-5fc7.restdb.io/rest/',
+          baseURL: 'https://laboratorio3-f36a.restdb.io/rest/',
           headers: {
-            'x-apikey': '64bdbc3386d8c5613ded91e7',
+            'x-apikey': '60eb09146661365596af552f',
           },
         });
       },
 
     verificarMovimientosRegistrados() {
       const idDeUsuario = this.nuevaId || localStorage.getItem('idDeUsuario');
-      const url = `https://laboratorio3-5fc7.restdb.io/rest/transactions?q={"user_id":"${idDeUsuario}"}`;
+      const url = `https://laboratorio3-f36a.restdb.io/rest/transactions?q={"user_id":"${idDeUsuario}"}`;
       const apiClient = this.ApiClient();
 
       apiClient
@@ -138,6 +138,7 @@ export default {
       money: this.nuevoMonto,
       crypto_amount: this.edicionDelMovimiento.crypto_amount,
     });
+    console.log("Movimiento editado y guardado")
     console.log(response);
 
     this.verificarMovimientosRegistrados();
@@ -146,6 +147,7 @@ export default {
     console.error("Error al guardar la edición del movimiento: ", error);
   }
 },
+
 cancelarEdicionMovimiento() {
   this.mostrandoEdicionDeFormulario = false;
   this.edicionDelMovimiento = null;
@@ -159,8 +161,11 @@ cancelarEdicionMovimiento() {
       if (!apiClient) return;
 
       const response = await apiClient.delete(`/transactions/${id}`);
-      console.log(response);
+      console.log("Movimiento borrado");  
+      this.movimientos = this.movimientos.filter(movimiento => movimiento._id !== id); //Actualizamos el HTML removiendo automáticamente los borrados. 
       return response.data;
+
+
     } catch (error) {
       console.error("Error al borrar el movimiento", error);
     }
@@ -205,6 +210,48 @@ th {
   border: 1px solid #00ccff;
   border-radius: 4px;
   color: white;
+}
+
+.otrousuario input {
+  outline: none;
+  width: 100%; 
+  height: 15%;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  appearance: none;
+  border-style: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  padding: 1%;
+  border: 2px solid transparent; /* Agrega un borde transparente */
+  box-shadow: 0 0 0 2px rgb(255, 123, 0); /* Inicialmente, establece un borde negro */
+  animation: borderAnimation 2.8s linear infinite; /* Agrega la animación al borde */
+}
+
+@keyframes borderAnimation {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgb(255, 235, 57); /* Borde negro */
+  }
+  50% {
+    box-shadow: 0 0 0 3px transparent, 0 0 0 6px rgb(255, 123, 0); /* Borde negro más grande */
+  }
+}
+
+.otrousuario button {
+  width: 80%; 
+  height: 60%;
+  border-radius: 5%;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 1; 
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+  transition: transform 0.3s ease;
+  color: black;
+}
+
+.otrousuario button:active,
+.otrousuario button:hover {
+  transform: scale(1.1);
 }
 </style>
 
